@@ -6,6 +6,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 
 public class MemoryStoreTest {
 
@@ -68,5 +70,10 @@ public class MemoryStoreTest {
 
         store.deleteBlob(BUCKET_NAME, key);
         store.loadBlob(BUCKET_NAME, key);
+    }
+
+    @Test
+    public void aTestThatFails() {
+        fail();
     }
 }
