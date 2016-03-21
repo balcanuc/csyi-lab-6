@@ -3,7 +3,7 @@ package amazon.cloudshape.core;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
+
 
 /**
  * Volatile storage that maintains all data in memory.
@@ -14,22 +14,25 @@ public class MemoryStore implements DataStore {
 
     @Override
     public Bucket loadBucket(String bucketName) {
-        if (objects.containsKey(bucketName))
+        if (objects.containsKey(bucketName)) {
             return new Bucket(bucketName);
-        else
+        } else {
             throw new BucketNotFoundException();
+        }
     }
 
     @Override
     public List<Bucket> loadBuckets() {
-        return objects.keySet().stream().
-                map(Bucket::new).
-                collect(Collectors.toList());
+        List<Bucket> result = new ArrayList<>();
+        for (String key : objects.keySet()) {
+            result.add(new Bucket(key));
+        }
+        return result;
     }
 
     @Override
     public void saveBucket(Bucket bucket) {
-        objects.putIfAbsent(bucket.getName(), new HashMap<>());
+        objects.putIfAbsent(bucket.getName(), new HashMap<String, String>());
     }
 
     @Override
@@ -44,8 +47,9 @@ public class MemoryStore implements DataStore {
         if (blobs != null) {
             String blobValue = blobs.get(blobKey);
 
-            if (blobValue != null)
+            if (blobValue != null) {
                 return new Blob(blobKey, blobValue);
+            }
         }
 
         throw new BlobNotFoundException();
@@ -53,27 +57,32 @@ public class MemoryStore implements DataStore {
 
     @Override
     public List<Blob> loadBlobs(String bucketName) {
-        if (objects.containsKey(bucketName))
-            return objects.get(bucketName).entrySet().stream().
-                    map(entry -> new Blob(entry.getKey(), entry.getValue())).
-                    collect(Collectors.toList());
-        else
+        if (objects.containsKey(bucketName)) {
+            List<Blob> result = new ArrayList<>();
+            for (Map.Entry<String, String> entry : objects.get(bucketName).entrySet()) {
+                result.add(new Blob(entry.getKey(), entry.getValue()));
+            }
+            return result;
+        } else {
             throw new BucketNotFoundException();
+        }
     }
 
     @Override
     public void saveBlob(String bucketName, Blob blob) {
-        if (objects.containsKey(bucketName))
+        if (objects.containsKey(bucketName)) {
             objects.get(bucketName).put(blob.getKey(), blob.getValue());
-        else
+        } else {
             throw new BucketNotFoundException();
+        }
     }
 
     @Override
     public void deleteBlob(String bucketName, String blobKey) {
-        if (objects.containsKey(bucketName))
+        if (objects.containsKey(bucketName)) {
             objects.get(bucketName).remove(blobKey);
-        else
+        } else {
             throw new BucketNotFoundException();
+        }
     }
 }

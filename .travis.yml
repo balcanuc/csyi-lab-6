@@ -1,6 +1,6 @@
 language: java
 jdk:
-- oraclejdk8
+- oraclejdk7
 deploy:
 - provider: s3
   access_key_id: AKIAJEKQIFMT56GAWG4Q
@@ -15,12 +15,12 @@ deploy:
   access_key_id: AKIAJEKQIFMT56GAWG4Q
   secret_access_key: *1
   bucket: balcanu-test-travis
-  key: csyi-lab-6
-  bundle_type: 'zip'
+  key: csyi-lab-6.tgz
+  bundle_type: 'tgz'
   application: csyi-lab-6
   deployment_group: theGroupName
   on: *2
 before_deploy:
 - mkdir -p dpl_cd_upload
-- mv target/cloudshape-1.0.0.jar dpl_cd_upload/cloudshape-1.0.0.jar
+- tar -czvf dpl_cd_upload/csyi-lab-6.tgz -C codedeploy .
 
