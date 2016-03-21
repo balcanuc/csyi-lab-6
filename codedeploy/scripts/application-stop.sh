@@ -10,3 +10,4 @@ echo >> /tmp/csyi_log.txt
 kill_pid=$(cat /tmp/csyi.pid)
 echo "killing PID $kill_pid"
 kill $kill_pid
+exit 0
