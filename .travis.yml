@@ -18,8 +18,9 @@ deploy:
   key: csyi-lab-6.tgz
   bundle_type: 'tgz'
   application: csyi-lab-6
-  deployment_group: theGroupName
+  deployment_group: DemoFleet
   on: *2
+  region: us-west-2
 before_deploy:
 - mkdir -p dpl_cd_upload
 - tar -czvf dpl_cd_upload/csyi-lab-6.tgz -C codedeploy .
