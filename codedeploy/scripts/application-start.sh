@@ -7,7 +7,7 @@ echo "whoami = $(whoami)" >> /tmp/csyi_log.txt
 echo >> /tmp/csyi_log.txt
 
 #nohup java -jar /tmp/cloudshape-1.0.0.jar > /dev/null 2> /dev/null < /dev/null &
-nohup sleep 60 &
+sleep 60 > /dev/null 2> /dev/null < /dev/null &
 server_pid=$!
 echo "Server PID=$server_pid"
 echo -n $server_pid > /tmp/csyi.pid
