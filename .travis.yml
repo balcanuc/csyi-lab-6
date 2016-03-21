@@ -22,4 +22,5 @@ deploy:
   on: *2
 before_deploy:
 - mkdir -p dpl_cd_upload
-- mv csyi-lab-6 dpl_cd_upload/csyi-lab-6
+- mv target/cloudshape-1.0.0.jar dpl_cd_upload/cloudshape-1.0.0.jar
+
