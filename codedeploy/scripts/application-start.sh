@@ -6,7 +6,6 @@ echo "date = $(date)" >> /tmp/csyi_log.txt
 echo "whoami = $(whoami)" >> /tmp/csyi_log.txt
 echo >> /tmp/csyi_log.txt
 
-
 nohup java -jar /tmp/cloudshape-1.0.0.jar&
 # nohup sleep 60&
 server_pid=$!
