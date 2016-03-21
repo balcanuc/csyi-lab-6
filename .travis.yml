@@ -10,7 +10,7 @@ deploy:
   skip_cleanup: true
   on: &2
     repo: balcanuc/csyi-lab-6
-  bucket: balcanu-test-travis
+  bucket: balcanu-test-travis-us-west-2
 - provider: codedeploy
   access_key_id: AKIAJEKQIFMT56GAWG4Q
   secret_access_key: *1
