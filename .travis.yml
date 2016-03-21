@@ -24,5 +24,8 @@ deploy:
   region: us-west-2
 before_deploy:
 - mkdir -p dpl_cd_upload
-- tar -czvf dpl_cd_upload/csyi-lab-6.tgz -C codedeploy .
+- cp -r codedeploy target
+- cp target/cloudshape-1.0.0.jar target/codedeploy
+- tar -czvf dpl_cd_upload/csyi-lab-6.tgz -C target/codedeploy .
+
 
